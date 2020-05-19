@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/intansemc2/Learn-Use-Express-Js#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pug": "^2.0.4"
   }
 }
