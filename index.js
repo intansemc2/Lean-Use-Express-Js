@@ -2,8 +2,12 @@ const express = require('express');
 const app = express();
 const appPort = 3000;
 
+//Configs
 app.set('view engine', 'pug');
 app.set('views', './views');
+
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 //Data
 var users = [
@@ -37,6 +41,17 @@ app.get('/users/search', function (request, response) {
 	response.render('./users/index.pug',{
 		users: matchedUsers,
 		q: q
+	});
+});
+
+app.get('/users/create', function (request, response) {
+	response.render('./users/create.pug');
+});
+
+app.post('/users/create', function (request, response) {
+	users.push({name: request.body.name});
+	response.render('./users/index.pug',{
+		users: users
 	});
 });
 
