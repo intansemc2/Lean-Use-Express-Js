@@ -2,6 +2,12 @@ const express = require('express');
 const app = express();
 const appPort = 3000;
 
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
+
+const adapter = new FileSync('db.json')
+const db = low(adapter)
+
 //Configs
 app.set('view engine', 'pug');
 app.set('views', './views');
@@ -10,10 +16,11 @@ app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 //Data
-var users = [
-	{ id: 0, name: "user 0" },
-	{ id: 1, name: "user 1" }
-];
+// Set some defaults (required if your JSON file is empty)
+db.defaults({ users: [] })
+  .write()
+
+var users = db.get("users").value();
 
 //Rounting 
 app.get('/', function (request, response) {
@@ -33,8 +40,8 @@ app.get('/users/search', function (request, response) {
 	var matchedUsers = [];
 
 	if (q) {
-		matchedUsers = users.filter(function (user) {
-			return user.name.indexOf(q) !== -1;
+		matchedUsers = db.get("users").value().filter(function (user) {
+			return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
 		});
 	}
 
@@ -49,9 +56,9 @@ app.get('/users/create', function (request, response) {
 });
 
 app.post('/users/create', function (request, response) {
-	users.push({name: request.body.name});
+	db.get("users").push({name: request.body.name}).write();
 	response.render('./users/index.pug',{
-		users: users
+		users: db.get("users").value()
 	});
 });
 
