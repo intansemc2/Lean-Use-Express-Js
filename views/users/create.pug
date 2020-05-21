@@ -1,13 +1,19 @@
-h1 Create User
+extends ../layouts/common.pug
 
-form(action='/users/create', method='POST')
-	label Name
-	span &emsp;
-	input(type='text', name='name')
-	span &emsp;
-	button(type='submit') Create
+block append headTitle
+	title Create user
 
-br
-a(href='/users') List Users
-span &emsp;
-a(href='/') Home
+block append bodyContents
+	h1 Create User
+
+	form(action='/users/create', method='POST')
+		label Name
+		span &emsp;
+		input(type='text', name='name')
+		span &emsp;
+		button(type='submit') Create
+
+	br
+	a(href='/users') List Users
+	span &emsp;
+	a(href='/') Home

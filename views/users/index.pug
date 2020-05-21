@@ -1,24 +1,42 @@
-h1 Users list
+extends ../layouts/common.pug
 
-form(action='/users/search', method='GET')
-	input(type='text', name='q', value=q)
+block append headTitle
+	title Users list
+
+block append bodyContents
+	h1 Users list
+
+	form(action='/users/search', method='GET')
+		input(type='text', name='q', value=q)
+		span &emsp;
+		button(type='submit') Search
+
+	if usersLength > 0
+		p Found #{usersLength} user
+
+		- var i = 1;
+		
+		table(class='table table-hover', border='1', cellpadding='1', cellspacing='0')
+			thead
+				tr
+					th No
+					th Name
+					th Action
+			tbody
+				each user in users
+					tr
+						td
+							span #{i++}
+						td
+							span #{user.name} &emsp;
+						td
+							a(href='/users/views/' + user.id) View
+	else
+		p Nothing here
+
+	br
+	a(href='/users/create') Create new user
 	span &emsp;
-	button(type='submit') Search
-
-if usersLength > 0
-	p Found #{usersLength} user
-	
-	ul 
-		each user in users
-			li
-				span #{user.name} &emsp;
-				a(href='/users/views/' + user.id) View
-else
-	p Nothing here
-
-br
-a(href='/users/create') Create new user
-span &emsp;
-a(href='/users') Refresh
-span &emsp;
-a(href='/') Home
+	a(href='/users') Refresh
+	span &emsp;
+	a(href='/') Home

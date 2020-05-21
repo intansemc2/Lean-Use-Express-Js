@@ -1,17 +1,23 @@
-h1 View user
+extends ../layouts/common.pug
 
-p 
-	b ID
-	span &nbsp;
-	span= user.id
+block append headTitle
+	title View user
 
+block append bodyContents
+	h1 View user
+
+	p 
+		b ID
+		span &nbsp;
+		span= user.id
+
+		span &emsp;
+
+		b Name
+		span &nbsp;
+		span= user.name
+
+	br
+	a(href='/users') List Users
 	span &emsp;
-
-	b Name
-	span &nbsp;
-	span= user.name
-
-br
-a(href='/users') List Users
-span &emsp;
-a(href='/') Home
+	a(href='/') Home
