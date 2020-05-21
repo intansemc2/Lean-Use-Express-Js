@@ -2,5 +2,12 @@ h1 Create User
 
 form(action='/users/create', method='POST')
 	label Name
+	span &emsp;
 	input(type='text', name='name')
+	span &emsp;
 	button(type='submit') Create
+
+br
+a(href='/users') List Users
+span &emsp;
+a(href='/') Home
