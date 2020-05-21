@@ -37,7 +37,6 @@ module.exports.create = function (request, response) {
 module.exports.viewById = function (request, response) {
 	var id = request.params.id;
 	var user = db.get("users").find({id: id}).value();
-	console.log(user);
 
 	response.render('users/views', {
 		user: user

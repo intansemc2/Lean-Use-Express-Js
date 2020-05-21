@@ -10,10 +10,11 @@ html(lang='vi')
 		block headContents
 
 	body
-		block bodyContents
+		div.container
+			block bodyContents
 
-		script(type="text/javascript", src="/javascripts/jquery-3.4.1.min.js")
-		script(type="text/javascript", src="/javascripts/popper.min.js")
-		script(type="text/javascript", src="/javascripts/bootstrap.min.js")
+			script(type="text/javascript", src="/javascripts/jquery-3.4.1.min.js")
+			script(type="text/javascript", src="/javascripts/popper.min.js")
+			script(type="text/javascript", src="/javascripts/bootstrap.min.js")
 
-		block bodyScripts
+			block bodyScripts
